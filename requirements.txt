@@ -1,4 +1,7 @@
+flask
 numpy
 pydub
 sounddevice
 soundfile
+nemo_toolkit[asr]
+cuda-python>=12.3
