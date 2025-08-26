@@ -1,3 +1,5 @@
+import config from './config';
+import './App.css';
 import React, { useState, useEffect, useRef } from 'react';
 
 function App() {
@@ -14,7 +16,7 @@ function App() {
 
   useEffect(() => {
     async function fetchQuestions() {
-      const response = await fetch('/questions');
+      const response = await fetch('/api/questions');
       const data = await response.json();
       setQuestions(data.items);
     }
@@ -27,12 +29,10 @@ function App() {
     audioChunksRef.current = [];
 
     mediaRecorder.ondataavailable = (event) => {
-      console.log('Chunk received');
       audioChunksRef.current.push(event.data);
     };
 
     mediaRecorder.onstop = () => {
-      console.log(`Number of chunks to save: ${audioChunksRef.current.length}`);
       const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' }); // Use webm for better compatibility
       const url = URL.createObjectURL(audioBlob);
       setAudioUrl(url);
@@ -70,7 +70,7 @@ function App() {
     const formData = new FormData();
     formData.append('audio', audioBlob, `${questions[currentIndex].id}.wav`);
 
-    const response = await fetch(`/audio/${questions[currentIndex].id}`, {
+    const response = await fetch(`/api/audio/${questions[currentIndex].id}`, {
       method: 'POST',
       body: formData
     });
@@ -83,7 +83,7 @@ function App() {
   };
 
   const fetchTranscription = async () => {
-    const response = await fetch(`/transcribe/${questions[currentIndex].id}`);
+    const response = await fetch(`/api/transcribe/${questions[currentIndex].id}`);
     if (response.ok) {
       const data = await response.json();
       setTranscription(data.transcription);
@@ -94,7 +94,7 @@ function App() {
   };
 
   const saveTranscription = async () => {
-    const response = await fetch(`/transcript/${questions[currentIndex].id}`, {
+    const response = await fetch(`/api/transcript/${questions[currentIndex].id}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text: editedTranscription })

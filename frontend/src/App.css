@@ -1,0 +1,79 @@
+/* Styling for the main app page with Tyrian Purple and Gold colors, gradients, and rounded corners */
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(45deg, #66023c, #ffc30b);
+  color: #fff;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#root {
+  background: linear-gradient(135deg, #66023c 0%, #a23e48 100%);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 100%;
+}
+
+h2 {
+  color: #ffc30b;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 1.25em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+button {
+  background: linear-gradient(45deg, #ffc30b, #ffdd4b);
+  border: none;
+  border-radius: 12px;
+  color: #66023c;
+  font-weight: bold;
+  padding: 10px 15px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 195, 11, 0.6);
+}
+
+button:disabled {
+  background: #a23e48;
+  color: #ddd;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+button:hover:not(:disabled) {
+  background: linear-gradient(45deg, #ffdd4b, #ffc30b);
+}
+
+textarea {
+  width: 100%;
+  border-radius: 12px;
+  border: 2px solid #ffc30b;
+  padding: 10px;
+  font-size: 1em;
+  color: #66023c;
+  resize: vertical;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 10px rgba(255, 195, 11, 0.4);
+}
+
+audio {
+  width: 100%;
+  margin: 10px 0;
+  outline: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(255, 195, 11, 0.4);
+}
+

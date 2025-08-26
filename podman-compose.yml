@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: ./frontend
+    networks:
+      - app-net
+
+  backend:
+    build:
+      context: ./backend
+    volumes:
+      - /home/vitalii/Projects/DumbInterviewer/data:/app/data
+    networks:
+      - app-net
+
+  transcription_service:
+    build:
+      context: ./transcription_service
+    networks:
+      - app-net
+    volumes:
+      transcription_weights:/root/.cache
+
+  nginx_proxy:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports:
+      - "3050:80"
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: bridge
+
+volumes:
+  transcription_weights:

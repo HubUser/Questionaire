@@ -7,7 +7,8 @@ import tempfile
 app = Flask(__name__)
 
 # Load transcription model once
-asr_model = nemo_asr.models.ASRModel.from_pretrained(model_name="nvidia/parakeet-tdt-0.6b-v3")
+# Use nvidia/parakeet-tdt-0.6b-v3 for multilingual suport
+asr_model = nemo_asr.models.ASRModel.from_pretrained(model_name="nvidia/parakeet-tdt-0.6b-v2")
 asr_model.change_attention_model(self_attention_model="rel_pos_local_attn", att_context_size=[256, 256])
 
 @app.route('/transcribe', methods=['POST'])
@@ -29,4 +30,4 @@ def transcribe():
     return jsonify({'transcription': transcription})
 
 if __name__ == '__main__':
-    app.run(port=5001)
+    app.run(host='0.0.0.0', port=5001, debug=True)

@@ -4,7 +4,7 @@ import requests
 # Use this to call the transcription Flask service
 
 def transcribe_audio_via_service(file_path):
-    url = 'http://localhost:5001/transcribe'
+    url = 'http://transcription_service:5001/transcribe'
     with open(file_path, 'rb') as f:
         files = {'file': (os.path.basename(file_path), f)}
         response = requests.post(url, files=files)

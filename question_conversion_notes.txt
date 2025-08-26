@@ -1,0 +1,3 @@
+jq -s '{items: [.[] | .items[]]}' ./output_python_part_*.txt
+jq '{items: [.items[] | select(.question != "")]}' questions.json > questions2.json
+jq '{items: [.items | to_entries | map({id: (.key + 1)} + .value)]}' data/questions.json > data/questions2.json
